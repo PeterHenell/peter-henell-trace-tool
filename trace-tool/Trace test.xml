@@ -1,0 +1,181 @@
+<databasetracing.tracing.SerializeableTraceResult>
+  <columnNames>
+    <string>Raw Sql text</string>
+    <string>Operation</string>
+    <string>New Transaction?</string>
+    <string>Event# in Tran</string>
+    <string>Main Table</string>
+    <string>Total Run Time (Ms)</string>
+    <string>With (Option)</string>
+    <string>Event Sequence</string>
+    <string>Transaction Id</string>
+    <string>Round Trip Time(Ms)</string>
+    <string>Duration</string>
+    <string>Session Id</string>
+    <string>Joining Tables</string>
+    <string>Query Parameters</string>
+  </columnNames>
+  <testName>Trace test</testName>
+  <result>
+    <string-array>
+      <string>Raw Sql text 0</string>
+      <string>Operation 0</string>
+      <string>New Transaction? 0</string>
+      <string>Event# in Tran 0</string>
+      <string>Main Table 0</string>
+      <string>Total Run Time (Ms) 0</string>
+      <string>With (Option) 0</string>
+      <string>Event Sequence 0</string>
+      <string>Transaction Id 0</string>
+      <string>Round Trip Time(Ms) 0</string>
+      <string>Duration 0</string>
+      <string>Session Id 0</string>
+      <string>Joining Tables 0</string>
+      <string>Query Parameters 0</string>
+    </string-array>
+    <string-array>
+      <string>Raw Sql text 1</string>
+      <string>Operation 1</string>
+      <string>New Transaction? 1</string>
+      <string>Event# in Tran 1</string>
+      <string>Main Table 1</string>
+      <string>Total Run Time (Ms) 1</string>
+      <string>With (Option) 1</string>
+      <string>Event Sequence 1</string>
+      <string>Transaction Id 1</string>
+      <string>Round Trip Time(Ms) 1</string>
+      <string>Duration 1</string>
+      <string>Session Id 1</string>
+      <string>Joining Tables 1</string>
+      <string>Query Parameters 1</string>
+    </string-array>
+    <string-array>
+      <string>Raw Sql text 2</string>
+      <string>Operation 2</string>
+      <string>New Transaction? 2</string>
+      <string>Event# in Tran 2</string>
+      <string>Main Table 2</string>
+      <string>Total Run Time (Ms) 2</string>
+      <string>With (Option) 2</string>
+      <string>Event Sequence 2</string>
+      <string>Transaction Id 2</string>
+      <string>Round Trip Time(Ms) 2</string>
+      <string>Duration 2</string>
+      <string>Session Id 2</string>
+      <string>Joining Tables 2</string>
+      <string>Query Parameters 2</string>
+    </string-array>
+    <string-array>
+      <string>Raw Sql text 3</string>
+      <string>Operation 3</string>
+      <string>New Transaction? 3</string>
+      <string>Event# in Tran 3</string>
+      <string>Main Table 3</string>
+      <string>Total Run Time (Ms) 3</string>
+      <string>With (Option) 3</string>
+      <string>Event Sequence 3</string>
+      <string>Transaction Id 3</string>
+      <string>Round Trip Time(Ms) 3</string>
+      <string>Duration 3</string>
+      <string>Session Id 3</string>
+      <string>Joining Tables 3</string>
+      <string>Query Parameters 3</string>
+    </string-array>
+    <string-array>
+      <string>Raw Sql text 4</string>
+      <string>Operation 4</string>
+      <string>New Transaction? 4</string>
+      <string>Event# in Tran 4</string>
+      <string>Main Table 4</string>
+      <string>Total Run Time (Ms) 4</string>
+      <string>With (Option) 4</string>
+      <string>Event Sequence 4</string>
+      <string>Transaction Id 4</string>
+      <string>Round Trip Time(Ms) 4</string>
+      <string>Duration 4</string>
+      <string>Session Id 4</string>
+      <string>Joining Tables 4</string>
+      <string>Query Parameters 4</string>
+    </string-array>
+    <string-array>
+      <string>Raw Sql text 0</string>
+      <string>Operation 0</string>
+      <string>New Transaction? 0</string>
+      <string>Event# in Tran 0</string>
+      <string>Main Table 0</string>
+      <string>Total Run Time (Ms) 0</string>
+      <string>With (Option) 0</string>
+      <string>Event Sequence 0</string>
+      <string>Transaction Id 0</string>
+      <string>Round Trip Time(Ms) 0</string>
+      <string>Duration 0</string>
+      <string>Session Id 0</string>
+      <string>Joining Tables 0</string>
+      <string>Query Parameters 0</string>
+    </string-array>
+    <string-array>
+      <string>Raw Sql text 1</string>
+      <string>Operation 1</string>
+      <string>New Transaction? 1</string>
+      <string>Event# in Tran 1</string>
+      <string>Main Table 1</string>
+      <string>Total Run Time (Ms) 1</string>
+      <string>With (Option) 1</string>
+      <string>Event Sequence 1</string>
+      <string>Transaction Id 1</string>
+      <string>Round Trip Time(Ms) 1</string>
+      <string>Duration 1</string>
+      <string>Session Id 1</string>
+      <string>Joining Tables 1</string>
+      <string>Query Parameters 1</string>
+    </string-array>
+    <string-array>
+      <string>Raw Sql text 2</string>
+      <string>Operation 2</string>
+      <string>New Transaction? 2</string>
+      <string>Event# in Tran 2</string>
+      <string>Main Table 2</string>
+      <string>Total Run Time (Ms) 2</string>
+      <string>With (Option) 2</string>
+      <string>Event Sequence 2</string>
+      <string>Transaction Id 2</string>
+      <string>Round Trip Time(Ms) 2</string>
+      <string>Duration 2</string>
+      <string>Session Id 2</string>
+      <string>Joining Tables 2</string>
+      <string>Query Parameters 2</string>
+    </string-array>
+    <string-array>
+      <string>Raw Sql text 3</string>
+      <string>Operation 3</string>
+      <string>New Transaction? 3</string>
+      <string>Event# in Tran 3</string>
+      <string>Main Table 3</string>
+      <string>Total Run Time (Ms) 3</string>
+      <string>With (Option) 3</string>
+      <string>Event Sequence 3</string>
+      <string>Transaction Id 3</string>
+      <string>Round Trip Time(Ms) 3</string>
+      <string>Duration 3</string>
+      <string>Session Id 3</string>
+      <string>Joining Tables 3</string>
+      <string>Query Parameters 3</string>
+    </string-array>
+    <string-array>
+      <string>Raw Sql text 4</string>
+      <string>Operation 4</string>
+      <string>New Transaction? 4</string>
+      <string>Event# in Tran 4</string>
+      <string>Main Table 4</string>
+      <string>Total Run Time (Ms) 4</string>
+      <string>With (Option) 4</string>
+      <string>Event Sequence 4</string>
+      <string>Transaction Id 4</string>
+      <string>Round Trip Time(Ms) 4</string>
+      <string>Duration 4</string>
+      <string>Session Id 4</string>
+      <string>Joining Tables 4</string>
+      <string>Query Parameters 4</string>
+    </string-array>
+  </result>
+</databasetracing.tracing.SerializeableTraceResult>
