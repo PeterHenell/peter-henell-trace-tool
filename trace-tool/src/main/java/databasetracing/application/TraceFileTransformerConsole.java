@@ -4,13 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import databasetracing.tracing.TraceResult;
 import databasetracing.tracing.TraceResultXmlParser;
 import databasetracing.transformers.ImageTransformer;
 import databasetracing.transformers.TraceResultTransformer;
 import databasetracing.transformers.WikiMarkupTransformer;
-import databasetracing.transformers.XmlTransformer;
 
 public class TraceFileTransformerConsole {
 
@@ -39,7 +37,7 @@ public class TraceFileTransformerConsole {
     public void transformTraceResultFromFile(String fileName) {
         List<TraceResultTransformer<?>> transformers = new ArrayList<TraceResultTransformer<?>>();
         transformers.add(new ImageTransformer());
-        transformers.add(new XmlTransformer());
+        // transformers.add(new XmlTransformer());
         transformers.add(new WikiMarkupTransformer());
 
         TraceResult traceResult = TraceResultXmlParser.fromXmlFile(fileName);

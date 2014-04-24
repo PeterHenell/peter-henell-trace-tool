@@ -13,8 +13,8 @@ public class TraceResultXmlParser {
     public static TraceResult fromXml(String xml) {
         XStream x = new XStream();
 
-        SerializeableTraceResult obj = (SerializeableTraceResult) x.fromXML(xml);
-        TraceResult traceResult = TraceResult.fromList(obj.result, obj.columnNames, obj.testName);
+        TraceResult traceResult = (TraceResult) x.fromXML(xml);
+        // TraceResult traceResult = TraceResult.fromList(obj.result, obj.columnNames, obj.testName);
         return traceResult;
     }
 
@@ -38,19 +38,24 @@ public class TraceResultXmlParser {
         return encoding.decode(ByteBuffer.wrap(encoded)).toString();
     }
 
-
-    /**
-     * Create a version of the TraceResult that can be serialized/deserialized
-     * 
-     * @param traceResult
-     * @return
-     */
-    public static SerializeableTraceResult toSerializableObject(TraceResult traceResult) {
-        SerializeableTraceResult seria = new SerializeableTraceResult();
-        seria.result = traceResult.getResult();
-        seria.testName = traceResult.getTestName();
-        seria.columnNames = traceResult.getColumnNames();
-
-        return seria;
-    }
+    // /**
+    // * Create a version of the TraceResult that can be serialized/deserialized
+    // *
+    // * @param traceResult
+    // * @return
+    // */
+    // public static Trace toSerializableObject(TraceResult traceResult) {
+    // SerializeableTraceResult seria = new SerializeableTraceResult();
+    //
+    // List<TraceResultData> rows = new ArrayList<>();
+    //
+    // for (TraceResultData data : traceResult.getResult()) {
+    // rows.add(data);
+    // }
+    //
+    // seria.result = rows;
+    // seria.testName = traceResult.getTestName();
+    //
+    // return seria;
+    // }
 }

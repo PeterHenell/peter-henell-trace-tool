@@ -3,18 +3,18 @@ package databasetracing.transformers;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-
 import databasetracing.common.Globals;
 import databasetracing.queryparsers.sqlserver.SqlQueryParserBuilder;
 import databasetracing.tracing.TraceResult;
+import databasetracing.tracing.dto.TraceResultData;
 
 public class SqlTextTransformer extends AbstractTraceResultTransformer implements TraceResultTransformer<String> {
 
     public String transformFrom(TraceResult traceResult) {
         StringBuilder sb = new StringBuilder();
 
-        for (String[] row : traceResult.getResult()) {
-            String sqlString = row[traceResult.getColumnPosition(TraceResult.RAW_SQL_TEXT_POSITION)];
+        for (TraceResultData row : traceResult.getResult()) {
+            String sqlString = row.getRaw_sql();
             String parsed = SqlQueryParserBuilder.parseQuery(sqlString);
             if (parsed == null && !sqlString.isEmpty()) {
                 sb.append("--Could not parse non-empty string: " + Globals.NEWLINE_STRING + sqlString);

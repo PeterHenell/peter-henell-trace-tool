@@ -4,8 +4,8 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import databasetracing.tracing.SerializeableTraceResultBuilder;
 import databasetracing.tracing.TraceResult;
+import databasetracing.tracing.TraceResultBuilder;
 
 public class LogParserTest {
 
@@ -83,7 +83,7 @@ public class LogParserTest {
 
 
     public static TraceResult getFullExpectedResult() {
-        SerializeableTraceResultBuilder builder = new SerializeableTraceResultBuilder();
+        TraceResultBuilder builder = new TraceResultBuilder();
         builder.newRow().operation("BEGIN").session_id("534cf0be.7c4").event_number_in_transaction("1").transaction_id("0")
                 .raw_sql("LOG:  statement: BEGIN").event_sequence_number("1").is_new_transaction("1").duration("0.000").total_run_time("0");
 
@@ -131,7 +131,7 @@ public class LogParserTest {
                 .raw_sql("LOG:  statement: COMMIT").event_sequence_number("12").is_new_transaction("0").duration("3.000")
                 .total_run_time("14");
 
-        TraceResult expected = SerializeableTraceResultBuilder.toTraceResult(builder, "expected");
+        TraceResult expected = builder.build("expected");
         return expected;
     }
 
@@ -161,11 +161,11 @@ public class LogParserTest {
     @Test
     public void shouldParseTwoLogLinesAsOneResultRow() {
         // Prepare expected
-        SerializeableTraceResultBuilder builder = new SerializeableTraceResultBuilder();
+        TraceResultBuilder builder = new TraceResultBuilder();
         builder.newRow().operation("BEGIN").session_id("534cf0be.7c4").event_number_in_transaction("1").transaction_id("0")
                 .raw_sql("LOG:  statement: BEGIN").event_sequence_number("1").is_new_transaction("1").duration("0.000").total_run_time("0");
 
-        TraceResult expected = SerializeableTraceResultBuilder.toTraceResult(builder, "expected");
+        TraceResult expected = builder.build("expected");
 
         // Now parse two lines
         LogParser p = new LogParser();
@@ -215,7 +215,7 @@ public class LogParserTest {
     public void shouldAggregateTotalRunTimePerTransaction() {
 
         // Prepare expected
-        SerializeableTraceResultBuilder builder = new SerializeableTraceResultBuilder();
+        TraceResultBuilder builder = new TraceResultBuilder();
         builder.newRow().operation("BEGIN").session_id("534cf0be.7c4").event_number_in_transaction("1").transaction_id("0")
                 .raw_sql("LOG:  statement: BEGIN").event_sequence_number("1").is_new_transaction("1").duration("0.000").total_run_time("0");
 
@@ -223,7 +223,7 @@ public class LogParserTest {
                 .raw_sql("LOG:  statement: DROP TABLE IF EXISTS cars").event_sequence_number("2").is_new_transaction("1").duration("1.000")
                 .total_run_time("1");
 
-        TraceResult expected = SerializeableTraceResultBuilder.toTraceResult(builder, "expected");
+        TraceResult expected = builder.build("expected");
 
         // Now parse two lines
         LogParser p = new LogParser();

@@ -2,42 +2,42 @@ package databasetracing.transformers;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.List;
-
 
 import databasetracing.common.Globals;
 import databasetracing.tracing.TraceResult;
+import databasetracing.tracing.dto.TraceResultData;
 
 public class WikiMarkupTransformer extends AbstractTraceResultTransformer implements TraceResultTransformer<String> {
 
-    private String stringArrayToWikiTableRowString(String[] r) {
+    private String stringArrayToWikiTableRowString(TraceResultData r) {
         String resultString = "|";
 
-        for (String s : r) {
-            if (s.equals("")) {
-                s = "&nbsp;";
-            }
-            resultString += s + "|";
-        }
-        return resultString;
+        // for (String s : r) {
+        // if (s.equals("")) {
+        // s = "&nbsp;";
+        // }
+        // resultString += s + "|";
+        // }
+        // TODO: this is not WIKI markup but will compile for now
+        return r.toString();
     }
 
 
-    private String stringArrayToWikiTableHeaderRowString(List<String> columnNames) {
+    private String stringArrayToWikiTableHeaderRowString() {
         String resultString = "|| ";
 
-        for (String colName : columnNames) {
-            resultString += colName + " || ";
+        for (int i = 0; i < 14; i++) {
+            resultString += "colName" + " || ";
         }
         return resultString;
     }
 
 
     private void writeWikiMarkup(StringBuilder sb, TraceResult traceResult) {
-        sb.append(stringArrayToWikiTableHeaderRowString(traceResult.getColumnNames()));
+        sb.append(stringArrayToWikiTableHeaderRowString());
         sb.append(Globals.NEWLINE_STRING);
 
-        for (String[] r : traceResult.getResult()) {
+        for (TraceResultData r : traceResult.getResult()) {
             String s = stringArrayToWikiTableRowString(r);
             s = cleanWikiString(s);
             sb.append(s);

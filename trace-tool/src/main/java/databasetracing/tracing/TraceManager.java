@@ -10,7 +10,6 @@ import databasetracing.transformers.ImageTransformer;
 import databasetracing.transformers.SqlTextTransformer;
 import databasetracing.transformers.TraceResultTransformer;
 import databasetracing.transformers.WikiMarkupTransformer;
-import databasetracing.transformers.XmlTransformer;
 
 public class TraceManager implements AutoCloseable {
 
@@ -48,7 +47,7 @@ public class TraceManager implements AutoCloseable {
 
 
     public void saveAllResults() {
-        saveAllResults(new XmlTransformer(), new WikiMarkupTransformer(), new SqlTextTransformer(), new ImageTransformer());
+        saveAllResults(new WikiMarkupTransformer(), new SqlTextTransformer(), new ImageTransformer());
     }
 
 

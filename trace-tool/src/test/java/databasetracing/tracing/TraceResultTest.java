@@ -3,6 +3,8 @@ package databasetracing.tracing;
 import org.junit.Assert;
 import org.junit.Test;
 
+import databasetracing.tracing.dto.TraceResultData;
+
 public class TraceResultTest {
 
     @Test
@@ -27,8 +29,8 @@ public class TraceResultTest {
     public void shouldFilterResultOnActionPerTransaction() {
         TraceResult result = TraceResultExamples.getExampleTraceResult("ImageTransformerTest", 23);
 
-        for (String[] row : result.getResult(2)) {
-            String tran = row[result.getColumnPosition(TraceResult.TRANSACTOIN_ID_POSITION)];
+        for (TraceResultData row : result.getResult(2)) {
+            String tran = row.getTransaction_id();
             Assert.assertTrue("Every transaction in this result set should have action count 2 or greater",
                     2 < result.getEventCountPerTransaction(tran));
         }
@@ -47,7 +49,7 @@ public class TraceResultTest {
 
         Assert.assertFalse(amy.isSameValuesAs(caesar));
 
-        duncan.getResult().get(0)[0] = "another value here";
+        duncan.getResult().get(0).setMain_table("another value here");
         Assert.assertFalse(amy.isSameValuesAs(duncan));
 
     }

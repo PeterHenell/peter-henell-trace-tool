@@ -3,14 +3,12 @@ package databasetracing.queryparsers.postgres;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import databasetracing.tracing.SerializeableTraceResult;
-import databasetracing.tracing.SerializeableTraceResultBuilder;
 import databasetracing.tracing.TraceResult;
+import databasetracing.tracing.TraceResultBuilder;
 
 /**
  * @author peter.henell
@@ -18,7 +16,7 @@ import databasetracing.tracing.TraceResult;
  */
 public class LogParser {
 
-    private final SerializeableTraceResultBuilder builder;
+    private final TraceResultBuilder builder;
 
     private final Map<String, Integer> transactions;
     private final String filter;
@@ -33,7 +31,7 @@ public class LogParser {
     // [database][processID][sessionId][timestamp][command tag][Number of the log line][tranId]
 
     public LogParser(String filter) {
-        this.builder = new SerializeableTraceResultBuilder();
+        this.builder = new TraceResultBuilder();
         transactions = new HashMap<String, Integer>();
         this.filter = filter;
     }
@@ -165,14 +163,9 @@ public class LogParser {
             throw new AssertionError("Log is invalid, missing a row?");
         }
 
-        SerializeableTraceResult internalResult = builder.build();
+        TraceResult internalResult = builder.build(resultName);
 
-        if (event_sequence_counter == 0) {
-            // no events where fully recorded
-            internalResult.result = new ArrayList<String[]>();
-        }
-
-        return TraceResult.fromList(internalResult.result, internalResult.columnNames, resultName);
+        return internalResult;
     }
 
 }

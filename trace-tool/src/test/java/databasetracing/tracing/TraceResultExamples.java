@@ -1,52 +1,25 @@
 package databasetracing.tracing;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import databasetracing.tracing.TraceResult;
-
 public class TraceResultExamples {
 
-    public static TraceResult getExampleTraceResult(String testName) {
-        List<String> columns = getTraceColumnNames();
-        List<String[]> traceRes = getTraceRows(columns, 10);
+    public static TraceResult getExampleTraceResult(String testName, int rowCount) {
+        TraceResultBuilder builder = new TraceResultBuilder();
 
-        TraceResult trace = TraceResult.fromList(traceRes, columns, testName);
-        return trace;
-    }
-
-
-    public static TraceResult getExampleTraceResult(String testName, int numberOfRows) {
-        List<String> columns = getTraceColumnNames();
-        List<String[]> traceRes = getTraceRows(columns, numberOfRows);
-
-        TraceResult trace = TraceResult.fromList(traceRes, columns, testName);
-        return trace;
-    }
-
-
-    public static List<String> getTraceColumnNames() {
-        List<String> columns = new ArrayList<String>();
-        for (String e : TraceResult.getExpectedColumnNames()) {
-            columns.add(e);
-        }
-        return columns;
-    }
-
-
-    public static List<String[]> getTraceRows(List<String> columns, int rowCount) {
-        List<String[]> traceRes = new ArrayList<String[]>();
         // produce 10 rows
-        for (int i = 10; i < rowCount + 10; i++) {
+        for (int i = 0; i < rowCount; i++) {
+            builder.newRow().duration("Duration " + i).event_number_in_transaction("Event# in Tran " + i)
+                    .event_sequence_number("Event Sequence " + i).is_new_transaction("New Transaction? " + i)
+                    .joining_tables("Joining Tables " + i).main_table("Main Table " + i).operation("Operation " + i)
+                    .query_option("With (Option) " + i).query_parameters("Query Parameters " + i).raw_sql("Raw Sql text " + i)
+                    .round_trip_time("Round Trip Time(Ms) " + i).session_id("Session Id " + i).total_run_time("Total Run Time (Ms) " + i)
+                    .transaction_id("Transaction Id " + i % 5); // NOTE THAT WE ONLY HAVE FIVE TRANSACTIONS
 
-            String[] row = new String[columns.size()];
-            // for each column name
-            for (int j = 0; j < columns.size(); j++) {
-                // reuse the same value every other time
-                row[j] = columns.get(j) + " " + i % 5;
-            }
-            traceRes.add(row);
         }
-        return traceRes;
+        return builder.build(testName);
+    }
+
+
+    public static TraceResult getExampleTraceResult(String testName) {
+        return getExampleTraceResult(testName, 10);
     }
 }

@@ -11,6 +11,7 @@ import java.util.Map;
 
 import databasetracing.tracing.TraceResult;
 import databasetracing.tracing.TraceTransaction;
+import databasetracing.tracing.dto.TraceResultData;
 
 public class ImageDrawer {
 
@@ -106,19 +107,19 @@ public class ImageDrawer {
     private void drawEventTexts(Graphics2D g2, TraceResult trace, Map<String, Integer> tranPositions) {
 
         for (int i = 0; i < trace.getResult().size(); i++) {
-            String[] row = trace.getResult().get(i);
+            TraceResultData row = trace.getResult().get(i);
 
-            String operator = row[trace.getColumnPosition(TraceResult.OPERATION_POSITION)];
-            String mainTableName = row[trace.getColumnPosition(TraceResult.MAIN_TABLE_POSITION)];
-            String params = row[trace.getColumnPosition(TraceResult.QUERY_PARAMETER_POSITION)];
-            String options = row[trace.getColumnPosition(TraceResult.QUERY_OPTION_POSITION)];
-            String totalRunTime = row[trace.getColumnPosition(TraceResult.TOTAL_RUN_TIME_POSITION)];
+            String operator = row.getOperation();
+            String mainTableName = row.getMain_table();
+            String params = row.getQuery_parameters();
+            String options = row.getQuery_option();
+            String totalRunTime = row.getTotal_run_time();
             totalRunTime += "ms";
-            String transactionId = row[trace.getColumnPosition(TraceResult.TRANSACTOIN_ID_POSITION)];
+            String transactionId = row.getTransaction_id();
 
             if (operator.equalsIgnoreCase("commit") || operator.equalsIgnoreCase("rollback")) {
-                mainTableName = "[" + row[trace.getColumnPosition(TraceResult.DURATION_POSITION)] + "ms";
-                mainTableName += ", " + row[trace.getColumnPosition(TraceResult.EVENT_NUMBER_IN_TRANSACTION_POSITION)] + " stmnts]";
+                mainTableName = "[" + row.getDuration() + "ms";
+                mainTableName += ", " + row.getEvent_number_in_transaction() + " stmnts]";
             }
 
             String eventText = formatEventText(operator, mainTableName, params, options);
