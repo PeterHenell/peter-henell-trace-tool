@@ -135,7 +135,6 @@ public class TraceResultBuilder {
 
     public TraceResult build(String testName) {
         if (validatedOnce) {
-
             putCurrentRow();
         }
         List<TraceResultData> newList = new ArrayList<>();

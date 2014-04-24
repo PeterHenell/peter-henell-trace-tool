@@ -9,6 +9,7 @@ import java.util.Map;
 
 import databasetracing.tracing.TraceResult;
 import databasetracing.tracing.TraceResultBuilder;
+import databasetracing.tracing.dto.TraceResultData;
 
 /**
  * @author peter.henell
@@ -164,6 +165,22 @@ public class LogParser {
         }
 
         TraceResult internalResult = builder.build(resultName);
+
+        for (TraceResultData data : internalResult.getResult()) {
+            if (data.getOperation().equalsIgnoreCase("begin")) {
+                String sessionId = data.getSession_id();
+                for (TraceResultData innerData : internalResult.getResult()) {
+                    if (innerData.getSession_id().equals(sessionId) && !innerData.equals(data)) {
+                        data.setTransaction_id(innerData.getTransaction_id());
+                        data.setIs_new_transaction("1");
+                        data.setEvent_number_in_transaction("0");
+                        innerData.setIs_new_transaction("0");
+
+                        break;
+                    }
+                }
+            }
+        }
 
         return internalResult;
     }

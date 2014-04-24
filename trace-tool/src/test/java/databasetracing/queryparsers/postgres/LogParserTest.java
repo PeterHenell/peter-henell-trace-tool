@@ -84,11 +84,11 @@ public class LogParserTest {
 
     public static TraceResult getFullExpectedResult() {
         TraceResultBuilder builder = new TraceResultBuilder();
-        builder.newRow().operation("BEGIN").session_id("534cf0be.7c4").event_number_in_transaction("1").transaction_id("0")
+        builder.newRow().operation("BEGIN").session_id("534cf0be.7c4").event_number_in_transaction("0").transaction_id("7472")
                 .raw_sql("LOG:  statement: BEGIN").event_sequence_number("1").is_new_transaction("1").duration("0.000").total_run_time("0");
 
         builder.newRow().operation("DROP TABLE").session_id("534cf0be.7c4").event_number_in_transaction("1").transaction_id("7472")
-                .raw_sql("LOG:  statement: DROP TABLE IF EXISTS cars").event_sequence_number("2").is_new_transaction("1").duration("1.000")
+                .raw_sql("LOG:  statement: DROP TABLE IF EXISTS cars").event_sequence_number("2").is_new_transaction("0").duration("1.000")
                 .total_run_time("1");
 
         builder.newRow().operation("CREATE TABLE").session_id("534cf0be.7c4").event_number_in_transaction("2").transaction_id("7472")
@@ -216,11 +216,11 @@ public class LogParserTest {
 
         // Prepare expected
         TraceResultBuilder builder = new TraceResultBuilder();
-        builder.newRow().operation("BEGIN").session_id("534cf0be.7c4").event_number_in_transaction("1").transaction_id("0")
+        builder.newRow().operation("BEGIN").session_id("534cf0be.7c4").event_number_in_transaction("0").transaction_id("7472")
                 .raw_sql("LOG:  statement: BEGIN").event_sequence_number("1").is_new_transaction("1").duration("0.000").total_run_time("0");
 
         builder.newRow().operation("DROP TABLE").session_id("534cf0be.7c4").event_number_in_transaction("1").transaction_id("7472")
-                .raw_sql("LOG:  statement: DROP TABLE IF EXISTS cars").event_sequence_number("2").is_new_transaction("1").duration("1.000")
+                .raw_sql("LOG:  statement: DROP TABLE IF EXISTS cars").event_sequence_number("2").is_new_transaction("0").duration("1.000")
                 .total_run_time("1");
 
         TraceResult expected = builder.build("expected");
@@ -233,25 +233,34 @@ public class LogParserTest {
         p.parse(testLog[3]);
 
         TraceResult actual = p.CollectResult("sample");
-        // actual.printResult();
 
         // Compare
         Assert.assertTrue(expected.isSameValuesAs(actual));
-
     }
 
-    // /**
-    // * Stolen with pride from: http://stackoverflow.com/questions/1555262/calculating-the-difference-between-two-java-date-instances Get a
-    // * diff between two dates
-    // *
-    // * @param date1 the oldest date
-    // * @param date2 the newest date
-    // * @param timeUnit the unit in which you want the diff
-    // * @return the diff value, in the provided unit
-    // */
-    // public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
-    // long diffInMillies = date2.getTime() - date1.getTime();
-    // return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
-    // }
+
+    @Test
+    public void shouldBePartOfTheTransactionThatItStarted() {
+        TraceResultBuilder builder = new TraceResultBuilder();
+        // note the transactionid in the first row
+        builder.newRow().operation("BEGIN").session_id("534cf0be.7c4").event_number_in_transaction("0").transaction_id("7472")
+                .raw_sql("LOG:  statement: BEGIN").event_sequence_number("1").is_new_transaction("1").duration("0.000").total_run_time("0");
+
+        builder.newRow().operation("DROP TABLE").session_id("534cf0be.7c4").event_number_in_transaction("1").transaction_id("7472")
+                .raw_sql("LOG:  statement: DROP TABLE IF EXISTS cars").event_sequence_number("2").is_new_transaction("0").duration("1.000")
+                .total_run_time("1");
+
+        TraceResult expected = builder.build("expected");
+
+        LogParser p = new LogParser();
+        p.parse(testLog[0]);
+        p.parse(testLog[1]);
+        p.parse(testLog[2]);
+        p.parse(testLog[3]);
+
+        TraceResult actual = p.CollectResult("sample");
+
+        Assert.assertTrue(expected.isSameValuesAs(actual));
+    }
 
 }

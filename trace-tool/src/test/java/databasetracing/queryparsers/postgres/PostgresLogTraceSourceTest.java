@@ -1,15 +1,12 @@
 package databasetracing.queryparsers.postgres;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import utils.TempFileManager;
 import databasetracing.tracing.TraceManager;
 import databasetracing.tracing.TraceResult;
 import databasetracing.tracing.sources.PostgresLogTraceSource;
@@ -44,13 +41,13 @@ public class PostgresLogTraceSourceTest {
 
         TraceResult expected = LogParserTest.getFullExpectedResult();
 
-        Path path = getTemporaryFile("test-temp");
+        Path path = TempFileManager.getTemporaryFile("test-temp");
 
         PostgresLogTraceSource source = new PostgresLogTraceSource(path, "");
         try (TraceManager manager = new TraceManager(source, "c:\\temp\\traces\\")) {
 
             manager.startTrace();
-            writeLogLines(path);
+            TempFileManager.writeLogLines(path, LogParserTest.testLog);
             manager.stopTrace();
 
             TraceResult actual = manager.collectTraceResult("Sample test");
@@ -70,44 +67,10 @@ public class PostgresLogTraceSourceTest {
     }
 
 
-    private Path getTemporaryFile(String filename) {
-        Path path = null;
-        try {
-            path = Files.createTempFile(filename, ".tmp");
-            path.toFile().deleteOnExit();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Assert.fail(e.getMessage());
-        }
-        return path;
-    }
-
-
-    /**
-     * Write test data to the specified file.
-     * 
-     * @param path
-     */
-    private void writeLogLines(Path path) {
-        // Writing to file4
-        try (BufferedWriter writer = Files.newBufferedWriter(path, Charset.defaultCharset())) {
-
-            for (String logLine : LogParserTest.testLog) {
-                writer.append(logLine);
-                writer.newLine();
-            }
-
-            writer.flush();
-        } catch (IOException exception) {
-            System.out.println("Error writing to file");
-        }
-    }
-
-
     @Test
     public void shouldAcceptAnExistingFile() {
 
-        Path path = getTemporaryFile("test-temp");
+        Path path = TempFileManager.getTemporaryFile("test-temp");
 
         PostgresLogTraceSource source = new PostgresLogTraceSource(path, "");
         Assert.assertNotNull(source);
