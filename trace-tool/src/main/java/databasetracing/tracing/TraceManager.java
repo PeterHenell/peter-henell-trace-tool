@@ -65,6 +65,7 @@ public class TraceManager implements AutoCloseable {
 
 
     public void stopTrace() {
+        System.out.println("TraceManager: stopTrace");
         traceSource.stopTrace();
     }
 

@@ -48,8 +48,8 @@ public class PostgresLogTraceSourceTest {
 
             manager.startTrace();
             TempFileManager.writeLogLines(path, LogParserTest.testLog);
-            manager.stopTrace();
 
+            manager.stopTrace();
             TraceResult actual = manager.collectTraceResult("Sample test");
 
             Assert.assertEquals(expected.getResult().size(), manager.getEventCount());

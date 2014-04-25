@@ -25,7 +25,7 @@ public final class LogFileData {
     }
 
 
-    public static final LogFileData get(final String logLine) {
+    public static final LogFileData get(final String logLine) throws UnmatchableException {
         // [database][processID][sessionId][timestamp][command tag][Number of the log line][tranId]
         Matcher m = getMatcherWithFind(logLine);
         return new LogFileData(m.group(1), m.group(2), m.group(3), m.group(4), m.group(5), m.group(6), m.group(7), m.group(8));
@@ -46,12 +46,12 @@ public final class LogFileData {
     }
 
 
-    private static Matcher getMatcherWithFind(String input) {
+    private static Matcher getMatcherWithFind(String input) throws UnmatchableException {
         Matcher matcher = pattern.matcher(input);
 
         // parse it!
         if (!matcher.find()) {
-            throw new AssertionError(String.format("Not matchable [%s]", input));
+            throw new UnmatchableException(String.format("Not matchable [%s]", input));
         }
         return matcher;
     }

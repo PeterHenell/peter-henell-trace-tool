@@ -232,6 +232,7 @@ public class TraceRunnerPanel extends JPanel implements ActionListener {
             publish("Stopping trace...");
             stopTimer();
 
+            traceManager.stopTrace();
             TraceResult traceResult = traceManager.collectTraceResult("GUI Trace");
             publish("saving trace results...");
 

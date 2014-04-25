@@ -2,6 +2,7 @@ package databasetracing.queryparsers.postgres;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import databasetracing.tracing.TraceResult;
@@ -173,7 +174,7 @@ public class LogParserTest {
         p.parse(testLog[1]);
 
         TraceResult actual = p.CollectResult("sample");
-        actual.printResult();
+        // actual.printResult();
 
         // Compare
         Assert.assertTrue(expected.isSameValuesAs(actual));
@@ -189,6 +190,7 @@ public class LogParserTest {
 
 
     @Test(expected = AssertionError.class)
+    @Ignore(value = "Not sure if this should be a requirement or not")
     public void ShouldOnlyBeAbeToCollectResultFromLogFileWithAllLogLines() {
         LogParser p = new LogParser();
         p.parse(testLog[0]);
@@ -204,10 +206,10 @@ public class LogParserTest {
     }
 
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void shouldOnlyBeAbleToParseCorrectLogFile() {
         LogParser p = new LogParser();
-        p.parse("select * from errors where description = 'this is an errornous log line'");
+        Assert.assertFalse(p.parse("select * from errors where description = 'this is an errornous log line'"));
     }
 
 
@@ -261,6 +263,48 @@ public class LogParserTest {
         TraceResult actual = p.CollectResult("sample");
 
         Assert.assertTrue(expected.isSameValuesAs(actual));
+    }
+
+
+    @Test
+    public void shouldIgnoreLogLinesItCannotParse() {
+        // Prepare expected
+        TraceResult expected = getFullExpectedResult();
+
+        // Now parse
+        LogParser p = new LogParser();
+        p.parse("INVALID LOG LINES IT SHOULD IGNORE");
+        p.parse("INVALID LOG LINES IT SHOULD IGNORE");
+        p.parse("INVALID LOG LINES IT SHOULD IGNORE");
+        p.parse("INVALID LOG LINES IT SHOULD IGNORE");
+
+        for (String logLine : testLog) {
+            p.parse(logLine);
+        }
+        p.parse("INVALID LOG LINES IT SHOULD IGNORE");
+        p.parse("INVALID LOG LINES IT SHOULD IGNORE");
+        p.parse("INVALID LOG LINES IT SHOULD IGNORE");
+        p.parse("INVALID LOG LINES IT SHOULD IGNORE");
+
+        TraceResult actual = p.CollectResult("sample");
+
+        // Compare
+        Assert.assertTrue(expected.isSameValuesAs(actual));
+
+    }
+
+
+    @Test
+    public void shouldParseHugeLogFile() {
+        LogParser p = new LogParser();
+        for (int i = 0; i < 1000; i++) {
+            for (String logLine : testLog) {
+                p.parse(logLine);
+            }
+        }
+
+        TraceResult actual = p.CollectResult("sample");
+        Assert.assertNotNull(actual);
     }
 
 }

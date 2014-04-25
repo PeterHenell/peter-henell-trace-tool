@@ -61,8 +61,13 @@ public class LogParser {
      * @return true if the logline was parsed as a full event
      */
     public boolean parse(String input) {
+        LogFileData logData = null;
 
-        LogFileData logData = LogFileData.get(input);
+        try {
+            logData = LogFileData.get(input);
+        } catch (UnmatchableException e) {
+            return false;
+        }
 
         if (!passesFilter(logData)) {
             return false;
@@ -84,7 +89,14 @@ public class LogParser {
         // row1 is the row containing the "idle"
         // input is containing duration in the rawSQL text
 
-        LogFileData previousLogData = LogFileData.get(row1);
+        LogFileData previousLogData;
+        try {
+            previousLogData = LogFileData.get(row1);
+        } catch (UnmatchableException e) {
+            // Since this row was already parsed before, it should be parsable again
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
 
         String duration = parseDuration(logData.getRawSQL());
         String transaction_id = logData.getTranId();
@@ -160,9 +172,10 @@ public class LogParser {
 
 
     public TraceResult CollectResult(String resultName) {
-        if (sessionLogStore.size() > 0) {
-            throw new AssertionError("Log is invalid, missing a row?");
-        }
+        // if (sessionLogStore.size() > 0) {
+        // System.err.print("Log is invalid, missing a row?");
+        // throw new AssertionError("Log is invalid, missing a row?");
+        // }
 
         TraceResult internalResult = builder.build(resultName);
 
@@ -170,7 +183,8 @@ public class LogParser {
             if (data.getOperation().equalsIgnoreCase("begin")) {
                 String sessionId = data.getSession_id();
                 for (TraceResultData innerData : internalResult.getResult()) {
-                    if (innerData.getSession_id().equals(sessionId) && !innerData.equals(data)) {
+                    if (innerData.getSession_id().equals(sessionId) && !innerData.equals(data)
+                            && !innerData.getTransaction_id().equals("0")) {
                         data.setTransaction_id(innerData.getTransaction_id());
                         data.setIs_new_transaction("1");
                         data.setEvent_number_in_transaction("0");
