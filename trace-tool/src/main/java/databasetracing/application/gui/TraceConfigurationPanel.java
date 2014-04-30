@@ -47,8 +47,8 @@ public class TraceConfigurationPanel extends JPanel {
         TraceGUIConfiguration config = new TraceGUIConfiguration();
         config.setDbName(databaseName.getText());
         config.setServerName(serverName.getText());
-        config.setPassword("sqldeploy");
-        config.setUserName("sqldeploy");
+        config.setPassword("");
+        config.setUserName("");
         return config;
     }
 

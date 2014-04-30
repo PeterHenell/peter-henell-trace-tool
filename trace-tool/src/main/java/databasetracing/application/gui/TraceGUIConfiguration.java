@@ -49,10 +49,10 @@ public class TraceGUIConfiguration {
 
 
     public TraceGUIConfiguration() {
-        dbName = "devdba_gp_cl01";
-        userName = "sqldeploy";
-        password = "sqldeploy";
-        // serverName = "cyd-dbadb-02.dev.necorp.dom";
+        dbName = "PgPoc";
+        userName = "";
+        password = "";
+        
         serverName = "D:\\Program Files\\PostgreSQL\\9.3\\data\\pg_log\\postgresql-2014-04-22_000000.log";
     }
 
