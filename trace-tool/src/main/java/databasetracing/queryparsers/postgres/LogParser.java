@@ -162,9 +162,9 @@ public class LogParser {
     }
 
 
-    public String parseDuration(String group) {
-        if (group.contains("duration")) {
-            return group.substring(group.indexOf("duration: ") + 10, group.indexOf(" ms"));
+    public String parseDuration(String logLine) {
+        if (logLine.contains("duration")) {
+            return logLine.substring(logLine.indexOf("duration: ") + 10, logLine.indexOf(" ms"));
         } else {
             throw new AssertionError("String does not contain duration");
         }
@@ -185,6 +185,7 @@ public class LogParser {
                 for (TraceResultData innerData : internalResult.getResult()) {
                     if (innerData.getSession_id().equals(sessionId) && !innerData.equals(data)
                             && !innerData.getTransaction_id().equals("0")) {
+
                         data.setTransaction_id(innerData.getTransaction_id());
                         data.setIs_new_transaction("1");
                         data.setEvent_number_in_transaction("0");
