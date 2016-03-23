@@ -1,0 +1,14 @@
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\XEViewer.exe.config
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\XEViewer.csprojResolveAssemblyReference.cache
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\MainWindow.baml
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\MainWindow.g.cs
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\App.g.cs
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\XEViewer_MarkupCompile.cache
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\XEViewer.g.resources
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\XEViewer.Properties.Resources.resources
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\XEViewer.csproj.GenerateResource.Cache
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\XEViewer.exe
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\XEViewer.pdb
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\Microsoft.SqlServer.XE.Core.dll
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\XEViewer.exe
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\XEViewer.pdb
