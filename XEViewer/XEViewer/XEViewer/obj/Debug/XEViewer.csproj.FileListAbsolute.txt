@@ -12,3 +12,8 @@ C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\XEViewer.pdb
 C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\Microsoft.SqlServer.XE.Core.dll
 C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\XEViewer.exe
 C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\obj\Debug\XEViewer.pdb
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\XESession.Lib.dll
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\XESession.Lib.pdb
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\GalaSoft.MvvmLight.WPF45.dll
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\GalaSoft.MvvmLight.WPF45.pdb
+C:\src\github\trace-tool\XEViewer\XEViewer\XEViewer\bin\Debug\GalaSoft.MvvmLight.WPF45.xml

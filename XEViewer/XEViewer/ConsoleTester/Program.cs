@@ -20,7 +20,10 @@ namespace XeOM_BlogDemo
         {
             // Since all examples must connect to the server we'll
             // create a single XEStore object to use thorughout.
-            XEStore xestore = ConnectToXEStore();
+            XEStore xestore = ConnectToXEStore("localhost");
+
+            //XESessionManager
+
 
             var session = xestore.Sessions.FirstOrDefault(x => x.Name == "Queryplan_Collector");
             
@@ -49,6 +52,23 @@ namespace XeOM_BlogDemo
         }
 
 
+        private static XEStore ConnectToXEStore(string server)
+        {
+            // The XEStore is a type of SFC store so we use the SqlStoreConnection
+            // and a SqlConnection to pass to the XEStore.
+            // Reference SFC and SqlServer.ConnectionInfo from SQL version specific dirtory,
+            // eg: C:\Program Files (x86)\Microsoft SQL Server\110\SDK\Assemblies
+            Microsoft.SqlServer.Management.Sdk.Sfc.SqlStoreConnection storeConnection;
+            SqlConnectionStringBuilder conBuild = new SqlConnectionStringBuilder();
+            conBuild.DataSource = string.Format("({0})", server);
+            conBuild.InitialCatalog = "master";
+            conBuild.IntegratedSecurity = true;
+
+            storeConnection = new Microsoft.SqlServer.Management.Sdk.Sfc.SqlStoreConnection(
+                new SqlConnection(conBuild.ConnectionString));
+
+            return new XEStore(storeConnection);
+        }
 
         #region XeExploreMetadata
         /// <summary>

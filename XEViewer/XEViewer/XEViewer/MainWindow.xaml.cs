@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using XEViewer.ViewModels;
 
 namespace XEViewer
 {
@@ -21,31 +22,26 @@ namespace XEViewer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowViewModel vm;
         public MainWindow()
         {
             Loaded += MainWindow_Loaded;
             InitializeComponent();
-            
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            XEManager manager = new XEManager();
-            var dt = manager.GetEvents(@"Data Source = (local); Initial Catalog = master; Integrated Security = SSPI", "Queryplan_Collector");
-            eventGrid.DataContext = dt;
-            foreach (var d in dt)
-            {
-                Console.WriteLine(d);
-            }
+            //XEManager manager = new XEManager();
+            //var dt = manager.GetEvents(@"Data Source = (SEK-XFTRNR1); Initial Catalog = master; Integrated Security = SSPI", "Queryplan_Collector");
+            //eventGrid.DataContext = dt;
+            //foreach (var d in dt)
+            //{
+            //    Console.WriteLine(d);
+            //}
+            this.vm = new MainWindowViewModel();
+            this.DataContext = vm; 
         }
 
-        private string GetConnection()
-        {
-            var builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "localhost";
-            builder.InitialCatalog = "master";
-            builder.IntegratedSecurity = true;
-            return builder.ToString();
-        }
+      
     }
 }

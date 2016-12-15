@@ -12,7 +12,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
-        <DataGrid x:Name="eventGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Width="300" Height="300"/>
+        <DataGrid x:Name="eventGrid" 
+                  DataContext="{Binding Items}"
+                  HorizontalAlignment="Left" 
+                  VerticalAlignment="Top" 
+                  AutoGenerateColumns="True"
+                  Grid.Column="1" Grid.Row="1" Width="300" Height="300"/>
 
     </Grid>
 </Window>

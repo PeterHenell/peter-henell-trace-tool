@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XEViewer", "XEViewer\XEViewer.csproj", "{85541176-0466-4592-BD06-EF06380357B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTester", "ConsoleTester\ConsoleTester.csproj", "{DDF8CEA6-65DD-4CD3-B8CA-1BA2CEC67276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XESession.Lib", "XESession.Lib\XESession.Lib.csproj", "{F313B431-B040-484B-B020-BCB6AC0F4332}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DDF8CEA6-65DD-4CD3-B8CA-1BA2CEC67276}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDF8CEA6-65DD-4CD3-B8CA-1BA2CEC67276}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDF8CEA6-65DD-4CD3-B8CA-1BA2CEC67276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F313B431-B040-484B-B020-BCB6AC0F4332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F313B431-B040-484B-B020-BCB6AC0F4332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F313B431-B040-484B-B020-BCB6AC0F4332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F313B431-B040-484B-B020-BCB6AC0F4332}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
