@@ -8,17 +8,24 @@
             <RowDefinition Height="90*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="90*"/>
         </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <Button Content="Start" Command="{Binding StartTraceCommand}" />
+            <Button Content="Stop" Command="{Binding StopTraceCommand}" />
+            <Button Content="Edit..." Command="{Binding EditTraceCommand}" />
+        </StackPanel>
+        
         <TextBlock Text="{Binding Items.Count}" Grid.Column="1" Grid.Row="0" />
-        <ListBox ItemsSource="{Binding Items}" Grid.Column="1" Grid.Row="1" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <!--<ListBox ItemsSource="{Binding Items}" Grid.Column="1" Grid.Row="1" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding sql_text}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
         
         <DataGrid x:Name="eventGrid" 
                   ItemsSource="{Binding Items}"

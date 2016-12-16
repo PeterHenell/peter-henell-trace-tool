@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Threading;
 using XESession.Lib;
 
@@ -28,6 +30,7 @@ namespace XEViewer.ViewModels
         //}
 
         private System.Collections.ObjectModel.ObservableCollection<dynamic> _items;
+        private TraceManager traceManager;
 
         public System.Collections.ObjectModel.ObservableCollection<dynamic> Items
         {
@@ -39,6 +42,9 @@ namespace XEViewer.ViewModels
             }
         }
 
+        public ICommand StartTraceCommand { get; set; }
+        public ICommand StopTraceCommand { get; set; }
+        public ICommand EditTraceCommand { get; set; }
 
 
         public MainWindowViewModel()
@@ -49,38 +55,39 @@ namespace XEViewer.ViewModels
 
             Items = new System.Collections.ObjectModel.ObservableCollection<dynamic>();
 
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += dowork;
-            worker.RunWorkerAsync();
+            traceManager = new TraceManager(GetConnection(), "");
+
+            StopTraceCommand = new RelayCommand(() => {
+                traceManager.Pause();
+            });
+
+            EditTraceCommand = new RelayCommand(() => { 
+                // well...
+            });
+
+            StartTraceCommand = new RelayCommand(() => {
+                traceManager.Start();
+
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.DoWork += dowork;
+                worker.RunWorkerAsync();
+            });
         }
 
         private void dowork(object sender, DoWorkEventArgs e)
         {
             XEManager manager = new XEManager();
-            //while (true)
-            //{
             DynamicTypeBuilder builder = null;
             foreach (var dr in manager.GetEvents(GetConnection(), "Queryplan_Collector", _table))
             {
                 builder = builder ?? new DynamicTypeBuilder(_table);
-                //_table.Rows.Add(dr);
-                //var builder = new DynamicTypeBuilder(_table);
                 var item = builder.CreateNewObject(_table);
                 builder.SetValues(item, dr);
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
                     {
-                        // Dispatch back to the main thread
                         Items.Add(item);
                     });
-
-                //Dispatcher.CurrentDispatcher.BeginInvoke((Action)(() =>
-                //{
-
-                //}));
-
             }
-            //Thread.Sleep(1000);
-            //}
         }
 
         private string GetConnection()
