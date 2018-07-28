@@ -15,9 +15,7 @@ public class TraceResult {
 
     private TraceResult(List<TraceResultData> result, String testName) {
         this.result = result;
-        // this.columnNames = columnNames;
         this.testName = testName;
-        // columnPositions = initColumnPositions(columnNames);
         actionInTranCount = getEventCountPerTransaction();
     }
 
@@ -28,7 +26,6 @@ public class TraceResult {
     }
 
     private final List<TraceResultData> result;
-    // private final List<String> columnNames;
     private final String testName;
     private Map<String, Integer> actionInTranCount;
     private Map<String, Integer> columnPositions;
@@ -79,7 +76,6 @@ public class TraceResult {
         int removedCount = 0;
         List<TraceResultData> newResult = new ArrayList<>();
         for (TraceResultData row : result) {
-            // String transactionId = row[getColumnPosition(TraceResult.TRANSACTOIN_ID_POSITION)];
             if (getEventCountPerTransaction(row.getTransaction_id()) > minActionPerTransaction) {
                 newResult.add(row);
             } else {
@@ -92,65 +88,11 @@ public class TraceResult {
     }
 
 
-    // public List<String> getColumnNames() {
-    // return columnNames;
-    // }
-
     public String getTestName() {
         return testName;
     }
 
 
-    // /**
-    // * returns a list of columns that are expected to be part of the trace result Failing to supply these columns will result in failure
-    // of
-    // * creating a TraceResult when initColumnPositions is called
-    // *
-    // * @return
-    // */
-    // public static Set<String> getExpectedColumnNames() {
-    // Set<String> expectedColumnNames = new HashSet<String>();
-    // expectedColumnNames.add(OPERATION_POSITION);
-    // expectedColumnNames.add(MAIN_TABLE_POSITION);
-    // expectedColumnNames.add(QUERY_OPTION_POSITION);
-    // expectedColumnNames.add(JOINING_TABLES_POSITION);
-    // expectedColumnNames.add(QUERY_PARAMETER_POSITION);
-    // expectedColumnNames.add(TOTAL_RUN_TIME_POSITION);
-    // expectedColumnNames.add(ROUND_TRIP_POSITION);
-    // expectedColumnNames.add(SESSION_ID_POSITION);
-    // expectedColumnNames.add(TRANSACTOIN_ID_POSITION);
-    // expectedColumnNames.add(NEW_TRANSACTION__POSITION);
-    // expectedColumnNames.add(EVENT_NUMBER_IN_TRANSACTION_POSITION);
-    // expectedColumnNames.add(EVENT_SEQUENCE_POSITION);
-    // expectedColumnNames.add(DURATION_POSITION);
-    // expectedColumnNames.add(RAW_SQL_TEXT_POSITION);
-    // return expectedColumnNames;
-    // }
-
-    // /**
-    // * each column get assigned a position in <result> Failure to provide all the expected columns in the columns list will cause a
-    // failure
-    // *
-    // * @param columns
-    // * @return
-    // */
-    // private Map<String, Integer> initColumnPositions(List<String> columns) {
-    // Map<String, Integer> cols = new HashMap<String, Integer>();
-    // int setCount = 0;
-    //
-    // for (int j = 0; j < columns.size(); j++) {
-    // String colName = columns.get(j);
-    //
-    // if (getExpectedColumnNames().contains(colName)) {
-    // cols.put(colName, j);
-    // setCount++;
-    // }
-    // }
-    // if (setCount != getExpectedColumnNames().size()) {
-    // throw new RuntimeException("Could not find all the columns in the result set, found " + setCount);
-    // }
-    // return cols;
-    // }
 
     public void printResult() {
         for (TraceResultData data : result) {
@@ -163,28 +105,16 @@ public class TraceResult {
      * create a new TraceResult based on a List of string arrays, no public constructor
      * 
      * @param traceRes
-     * @param columnNames
      * @param testName
      * @return
      */
     public static TraceResult fromList(List<TraceResultData> traceRes, String testName) {
-
-        // List<String[]> values = new ArrayList<>();
-        // for (TraceResultData data : traceRes) {
-        // values.add(data.toStringArray());
-        // }
-
         return new TraceResult(traceRes, testName);
     }
 
 
-    // public static TraceResult fromRawList(List<String[]> traceRes, String testName) {
-    // r = TraceResultData.fromArray(traceRes, columnNames)
-    // return new TraceResult(traceRes, testName);
-    // }
-
     /**
-     * create a new TraceREsult based on a ResultSet, no public constructor
+     * create a new TraceResult based on a ResultSet, no public constructor
      * 
      * @param rs
      * @param testName
@@ -246,7 +176,6 @@ public class TraceResult {
     private Map<String, Integer> getEventCountPerTransaction() {
         Map<String, Integer> eventPerTran = new HashMap<>();
         for (TraceResultData row : result) {
-            // String transactionId = row[getColumnPosition(TraceResult.TRANSACTOIN_ID_POSITION)];
             Integer v = eventPerTran.get(row.getTransaction_id());
             // if the transaction is already in the map, then add one to it's counter;
             if (null == v) {

@@ -6,11 +6,13 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import databasetracing.tracing.TraceResult;
 import databasetracing.tracing.TraceTransaction;
+import databasetracing.tracing.dto.QueryCommands;
 import databasetracing.tracing.dto.TraceResultData;
 
 public class ImageDrawer {
@@ -159,18 +161,23 @@ public class ImageDrawer {
 
 
     private Color getColorForOperator(String command) {
-        if (command.equals("SELECT"))
-            return colorProfile.getSELECT_COLOR();
-        else if (command.equals("UPDATE"))
-            return colorProfile.getUPDATE_COLOR();
-        else if (command.equals("INSERT"))
-            return colorProfile.getINSERT_COLOR();
-        else if (command.equals("DELETE"))
-            return colorProfile.getDELETE_COLOR();
-        else if (command.equals("EXEC"))
-            return colorProfile.getEXEC_COLOR();
-        else
+        if(!Arrays.stream(QueryCommands.values()).anyMatch(s -> command == s.name()))
+        {
             return colorProfile.getLINE_COLOR();
+        }
+        return colorProfile.commandColors.get(QueryCommands.valueOf(command));
+//        if (command.equals("SELECT"))
+//            return colorProfile.getSELECT_COLOR();
+//        else if (command.equals("UPDATE"))
+//            return colorProfile.getUPDATE_COLOR();
+//        else if (command.equals("INSERT"))
+//            return colorProfile.getINSERT_COLOR();
+//        else if (command.equals("DELETE"))
+//            return colorProfile.getDELETE_COLOR();
+//        else if (command.equals("EXEC"))
+//            return colorProfile.getEXEC_COLOR();
+//        else
+//            return colorProfile.getLINE_COLOR();
     }
 
 

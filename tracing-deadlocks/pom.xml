@@ -8,29 +8,53 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.jgrapht</groupId>
-			<artifactId>jgrapht-ext</artifactId>
-			<version>0.8.3-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.jgrapht</groupId>-->
+			<!--<artifactId>jgrapht-core</artifactId>-->
+			<!--<version>1.2.0</version>-->
+			<!--<scope>provided</scope>-->
+		<!--</dependency>-->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.jgrapht/jgrapht &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.jgrapht</groupId>-->
+            <!--<artifactId>jgrapht</artifactId>-->
+            <!--<version>1.2.0</version>-->
+            <!--<type>pom</type>-->
+        <!--</dependency>-->
+
+
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.jgrapht/jgrapht-ext &ndash;&gt;-->
+		<!--<dependency>-->
+			<!--<groupId>org.jgrapht</groupId>-->
+			<!--<artifactId>jgrapht-ext</artifactId>-->
+			<!--<version>1.2.0</version>-->
+		<!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.mxgraph/jgraphx -->
+        <!-- https://mvnrepository.com/artifact/com.mxgraph/jgraphx -->
+        <dependency>
+            <groupId>com.mxgraph</groupId>
+            <artifactId>jgraphx</artifactId>
+            <!--<version>latest</version>-->
+        </dependency>
+
+
+        <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.collections/google-collections -->
 		<dependency>
-			<groupId>com.google.collect</groupId>
-			<artifactId>
-				com.springsource.com.google.common.collect
-			</artifactId>
-			<version>0.8.0.20080820</version>
+			<groupId>com.google.collections</groupId>
+			<artifactId>google-collections</artifactId>
+			<version>1.0</version>
 		</dependency>
+
 	</dependencies>
 
 </project>

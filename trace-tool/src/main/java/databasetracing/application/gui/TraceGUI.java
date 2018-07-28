@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 public class TraceGUI extends WindowAdapter implements ActionListener {
 
-    private JFrame frmTraceManager;
+    private JFrame mainFrame;
     private TraceConfigurationPanel traceConfigurationPanel;
     private TraceRunnerPanel traceRunnerPanel;
 
@@ -35,7 +35,7 @@ public class TraceGUI extends WindowAdapter implements ActionListener {
             public void run() {
                 try {
                     TraceGUI window = new TraceGUI();
-                    window.frmTraceManager.setVisible(true);
+                    window.mainFrame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -56,23 +56,23 @@ public class TraceGUI extends WindowAdapter implements ActionListener {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        frmTraceManager = new JFrame();
-        frmTraceManager.setAlwaysOnTop(true);
-        frmTraceManager.setResizable(false);
-        frmTraceManager.setTitle("Trace Manager");
-        frmTraceManager.setBounds(100, 100, 579, 110);
-        frmTraceManager.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frmTraceManager.getContentPane().setLayout(new BorderLayout(0, 0));
+        mainFrame = new JFrame();
+        mainFrame.setAlwaysOnTop(true);
+        mainFrame.setResizable(false);
+        mainFrame.setTitle("Trace Manager");
+        mainFrame.setBounds(100, 100, 579, 110);
+        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mainFrame.getContentPane().setLayout(new BorderLayout(0, 0));
 
-        frmTraceManager.addWindowListener(this);
+        mainFrame.addWindowListener(this);
 
         traceConfigurationPanel = new TraceConfigurationPanel(this, new TraceGUIConfiguration());
-        frmTraceManager.getContentPane().add(traceConfigurationPanel, BorderLayout.NORTH);
+        mainFrame.getContentPane().add(traceConfigurationPanel, BorderLayout.NORTH);
 
         traceRunnerPanel = new TraceRunnerPanel(this);
         FlowLayout flowLayout = (FlowLayout) traceRunnerPanel.getLayout();
         flowLayout.setAlignment(FlowLayout.LEFT);
-        frmTraceManager.getContentPane().add(traceRunnerPanel, BorderLayout.SOUTH);
+        mainFrame.getContentPane().add(traceRunnerPanel, BorderLayout.SOUTH);
     }
 
 

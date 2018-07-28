@@ -50,7 +50,7 @@ public class TraceRunnerPanel extends JPanel implements ActionListener {
     private JCheckBox chckbxNewCheckBox;
     private JLabel infoLabel;
 
-    private int eCount;
+    private int eventCount;
     private JRadioButton rdbtnTextOput;
     private JRadioButton rdbtnTextAndImage;
     private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -96,10 +96,10 @@ public class TraceRunnerPanel extends JPanel implements ActionListener {
 
         timer = new Timer(ONE_SECOND, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                eCount = traceManager.getEventCount();
+                eventCount = traceManager.getEventCount();
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
-                        updateEventCount(eCount);
+                        updateEventCount(eventCount);
                     }
                 });
             }
@@ -175,7 +175,7 @@ public class TraceRunnerPanel extends JPanel implements ActionListener {
 
         private void startTrace() {
             publish("Starting trace...");
-            eCount = 0;
+            eventCount = 0;
 
             TraceGUIConfiguration config = traceGUI.getTraceConfigurationPanel().getConfig();
             String serverName = config.getServerName();

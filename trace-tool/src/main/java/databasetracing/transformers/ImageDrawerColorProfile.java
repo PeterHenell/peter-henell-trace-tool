@@ -1,6 +1,10 @@
 package databasetracing.transformers;
 
+import databasetracing.tracing.dto.QueryCommands;
+
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ImageDrawerColorProfile {
 
@@ -51,6 +55,9 @@ public class ImageDrawerColorProfile {
         return EXEC_COLOR;
     }
 
+    public Map<QueryCommands, Color> commandColors = new HashMap<>();
+
+
 
     public static ImageDrawerColorProfile getPrintableColorProfile() {
         ImageDrawerColorProfile profile = new ImageDrawerColorProfile();
@@ -61,8 +68,20 @@ public class ImageDrawerColorProfile {
         profile.INSERT_COLOR = new Color(0xFF6347);
         profile.DELETE_COLOR = new Color(0x800080);
         profile.EXEC_COLOR = new Color(0x4169E1);
+        profile.buildcommandColors();
 
         return profile;
+    }
+
+    private void buildcommandColors() {
+        commandColors.clear();
+        commandColors.put(QueryCommands.Select, SELECT_COLOR);
+        commandColors.put(QueryCommands.Insert, INSERT_COLOR);
+        commandColors.put(QueryCommands.Update, UPDATE_COLOR);
+        commandColors.put(QueryCommands.Delete, DELETE_COLOR);
+        commandColors.put(QueryCommands.Exec, EXEC_COLOR);
+        commandColors.put(QueryCommands.CommitorRollback, getEXEC_COLOR());
+        commandColors.put(QueryCommands.Other, getEXEC_COLOR());
     }
 
 
@@ -75,7 +94,7 @@ public class ImageDrawerColorProfile {
         profile.INSERT_COLOR = new Color(0xCD7F32);
         profile.DELETE_COLOR = new Color(0x800080);
         profile.EXEC_COLOR = new Color(0x1589FF);
-
+        profile.buildcommandColors();
         return profile;
     }
 
@@ -89,7 +108,7 @@ public class ImageDrawerColorProfile {
         profile.INSERT_COLOR = new Color(0xCD7F32);
         profile.DELETE_COLOR = new Color(0x800080);
         profile.EXEC_COLOR = new Color(0x1589FF);
-
+        profile.buildcommandColors();
         return profile;
     }
 }
