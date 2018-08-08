@@ -2,6 +2,9 @@ package databasetracing.tracing.dto;
 
 import databasetracing.tracing.TraceResult;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Contain all the columns values in a TraceResult
  * 
@@ -44,10 +47,10 @@ public class TraceResultData {
     }
 
 
-    public String[] toStringArray() {
-        return new String[]{ operation, main_table, query_option, joining_tables, query_parameters, total_run_time, round_trip_time,
-                session_id, transaction_id, is_new_transaction, event_number_in_transaction, event_sequence_number, duration, raw_sql };
-    }
+//    public String[] toStringArray() {
+//        return new String[]{ operation, main_table, query_option, joining_tables, query_parameters, total_run_time, round_trip_time,
+//                session_id, transaction_id, is_new_transaction, event_number_in_transaction, event_sequence_number, duration, raw_sql };
+//    }
 
 
     public String getOperation() {
@@ -329,6 +332,12 @@ public class TraceResultData {
     public static TraceResultData fromArray(String[] source, String[] columnNames) {
         TraceResultData data = new TraceResultData();
 
+//        Map<String, String> resultMap = new HashMap<>();
+//
+//        for (int i = 0; i < columnNames.length; i++) {
+//          resultMap.put(columnNames[i], source[i]);
+//        }
+//
         for (int i = 0; i < columnNames.length; i++) {
             String colName = columnNames[i];
             String value = source[i];

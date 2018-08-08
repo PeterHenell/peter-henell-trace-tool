@@ -20,6 +20,6 @@ public class TraceResultExamples {
 
 
     public static TraceResult getExampleTraceResult(String testName) {
-        return getExampleTraceResult(testName, 10);
+        return getExampleTraceResult(testName, 25);
     }
 }

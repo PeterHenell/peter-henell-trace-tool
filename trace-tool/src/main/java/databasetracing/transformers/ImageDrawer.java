@@ -165,6 +165,7 @@ public class ImageDrawer {
         {
             return colorProfile.getLINE_COLOR();
         }
+        // Todo: Test if this will work since the enum value are not the same case as the command string
         return colorProfile.commandColors.get(QueryCommands.valueOf(command));
 //        if (command.equals("SELECT"))
 //            return colorProfile.getSELECT_COLOR();
