@@ -13,7 +13,7 @@ public class ResultSetTransformerTest {
 
     @Test
     public void shouldDrawSimpleImage() {
-        TraceResult traceResult = TraceResultExamples.getExampleTraceResult("ImageTransformerTest");
+        TraceResult traceResult = TraceResultExamples.getTwoNestedTransactionTraceResult("ImageTransformerTest");
         ImageTransformer transformer = new ImageTransformer();
 
         transformer.saveTransformation(traceResult, "");
