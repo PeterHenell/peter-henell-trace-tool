@@ -61,7 +61,7 @@ public class TraceResultExamples {
 
         // session does another transaction begin and commit tran events
         builder.newRow().duration("5")
-                .event_number_in_transaction(String.valueOf(2))
+                .event_number_in_transaction(String.valueOf(1))
                 .event_sequence_number(String.valueOf(i++))
                 .is_new_transaction("no")
                 .joining_tables("")
@@ -75,7 +75,7 @@ public class TraceResultExamples {
                 .total_run_time(String.valueOf(totalRunTime+=20))
                 .transaction_id("2");
         builder.newRow().duration("5")
-                .event_number_in_transaction(String.valueOf(1))
+                .event_number_in_transaction(String.valueOf(2))
                 .event_sequence_number(String.valueOf(i++))
                 .is_new_transaction("yes")
                 .joining_tables("")
@@ -90,7 +90,7 @@ public class TraceResultExamples {
                 .transaction_id("2");
 
         builder.newRow().duration("5")
-                .event_number_in_transaction(String.valueOf(2))
+                .event_number_in_transaction(String.valueOf(3))
                 .event_sequence_number(String.valueOf(i++))
                 .is_new_transaction("no")
                 .joining_tables("")

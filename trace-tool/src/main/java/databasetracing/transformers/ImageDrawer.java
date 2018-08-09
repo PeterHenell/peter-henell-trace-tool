@@ -22,7 +22,7 @@ public class ImageDrawer {
     private static final int MARGIN_TOP = 50;
     private static final int COLUMN_WIDTH = 230;
 
-    private static final Font TEXT_FONT = new Font("Verdana", Font.PLAIN, 12);;
+    private static final Font TEXT_FONT = new Font("Verdana", Font.PLAIN, 12);
     private static final int TEXT_MARGIN_FROM_TRANSACTION_LINE = 5;
     private static final int TRANSACTION_TEXT_Y_POS = 10;
 

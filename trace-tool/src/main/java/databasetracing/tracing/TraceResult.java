@@ -16,7 +16,7 @@ public class TraceResult {
     private TraceResult(List<TraceResultData> result, String testName) {
         this.result = result;
         this.testName = testName;
-        actionInTranCount = getEventCountPerTransaction();
+        this.actionInTranCount = getEventCountPerTransaction();
     }
 
 
@@ -27,8 +27,8 @@ public class TraceResult {
 
     private final List<TraceResultData> result;
     private final String testName;
-    private Map<String, Integer> actionInTranCount;
-    private Map<String, Integer> columnPositions;
+    private final Map<String, Integer> actionInTranCount;
+//    private Map<String, Integer> columnPositions;
 
     public final static String OPERATION_POSITION = "Operation";
     public final static String MAIN_TABLE_POSITION = "Main Table";
@@ -46,9 +46,9 @@ public class TraceResult {
     public final static String RAW_SQL_TEXT_POSITION = "Raw Sql text";
 
 
-    public int getColumnPosition(String positionName) {
-        return columnPositions.get(positionName);
-    }
+//    public int getColumnPosition(String positionName) {
+//        return columnPositions.get(positionName);
+//    }
 
 
     /**

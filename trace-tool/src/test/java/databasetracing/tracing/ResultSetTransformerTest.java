@@ -2,6 +2,7 @@ package databasetracing.tracing;
 
 import java.util.List;
 
+import databasetracing.transformers.DiagramTransformer;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,6 +20,13 @@ public class ResultSetTransformerTest {
         transformer.saveTransformation(traceResult, "");
     }
 
+    @Test
+    public void shouldDrawDiagram() {
+        TraceResult traceResult = TraceResultExamples.getTwoNestedTransactionTraceResult("DiagramTransformerTest");
+        DiagramTransformer transformer = new DiagramTransformer();
+
+        transformer.saveTransformation(traceResult, "");
+    }
 
     @Test
     public void shouldOutputFileWithSqlText() {

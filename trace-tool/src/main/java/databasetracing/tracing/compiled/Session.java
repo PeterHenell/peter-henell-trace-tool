@@ -2,18 +2,21 @@ package databasetracing.tracing.compiled;
 
 import databasetracing.tracing.TraceResult;
 import databasetracing.tracing.dto.TraceResultData;
+import org.apache.batik.svggen.SVGGraphics2D;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Session {
+public class Session implements SvgDrawable {
+
     public final String sessionId;
 
     // raw event data used internally to compile
-    private List<TraceResultData> rawEvents = new ArrayList<>();
-    private Map<String, Transaction> transactions = new HashMap<>();
+    private final List<TraceResultData> rawEvents = new ArrayList<>();
+    public final Map<String, Transaction> transactions = new HashMap<>();
 
     public Session(String sessionId){
         this.sessionId = sessionId;
@@ -50,5 +53,11 @@ public class Session {
         Map<String, Transaction> events = Transaction.from(this, rawEvents);
         assert events != null;
         this.transactions.putAll(events);
+    }
+
+    @Override
+    public void paint(int x, int y, SVGGraphics2D graphics) {
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(x, y,60, 20);
     }
 }
